@@ -39,11 +39,12 @@ const PostCard = ({ post, user, likePost, deletePost }) => {
   const handleLike = async (url) => {};
 
   return (
-    <div className="p-4 mb-2 bg-primary rounded-xl">
+    <div className="p-4 bg-primary rounded-xl my-2">
       <div className="flex items-center gap-3 mb-2">
         <Link to={"/profile/" + post?.userId?._id}>
+          {console.log("post.userId.profileUr1", post.userId.profileUrl)}
           <img
-            src={post?.userId?.profileUr1 || NoProfile}
+            src={post.userId.profileUrl || NoProfile}
             alt={post?.userId?.firstName}
             className="object-cover rounded-full w-14 h-14"
           />

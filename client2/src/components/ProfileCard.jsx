@@ -12,7 +12,7 @@ import moment from "moment/moment";
 const ProfileCard = ({ user }) => {
   const { user: data, edit } = useSelector((state) => state.user);
   // console.log("ProfileCarddata", data);
-  // console.log("ProfileCardUser", user);
+  console.log("ProfileCardUser", user);
   const dispatch = useDispatch();
   return (
     <div>

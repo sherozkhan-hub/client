@@ -13,7 +13,7 @@ import CustomButton from "../components/CustomButton";
 import { BsFiletypeGif, BsPersonFillAdd } from "react-icons/bs";
 import { BiImages, BiSolidVideo } from "react-icons/bi";
 import TextInput from "../components/TextInput";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import EditProfile from "../components/EditProfile";
 import axios from "axios";
 import { axiosInstance } from "../services/api-client";
@@ -41,13 +41,14 @@ const Home = () => {
   // const userHome = user.userFound;
   // redux
   const dispatch = useDispatch();
-  const { acceptButton, posts } = useSelector((state) => state.posts);
+  const { posts } = useSelector((state) => state.posts);
   const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
   // console.log(user, "chhhh");
 
   const fetchPost = async () => {
     const { data } = await axiosInstance.get("/posts");
+    // console.log(data.data, "post data");
     dispatch(setPosts(data.data));
   };
 
@@ -67,13 +68,13 @@ const Home = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getUser();
     fetchPost();
     fetchFriendRequest();
     fetchSuggestedFriend();
-    // setLoading(false);
+    setLoading(false);
   }, []);
-
   const handlePostSubmit = async (data) => {
     setPosting(true);
     try {
@@ -85,7 +86,7 @@ const Home = () => {
       const newData = uri ? { ...data, image: uri } : data;
 
       const res = await axiosInstance.post("/posts/create-post", newData);
-      console.log(res.data, "Post created");
+      // console.log(res.data, "Post created");
       dispatch(setPosts([res.data.data, ...posts]));
       setPosting(false);
 
