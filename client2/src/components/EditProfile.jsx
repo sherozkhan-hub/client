@@ -28,6 +28,9 @@ const EditProfile = () => {
       location: user.userFound?.location,
     },
   });
+  useEffect(() => {
+    console.log("hello world");
+  }, [user]);
 
   const onSubmit = async (data) => {
     try {

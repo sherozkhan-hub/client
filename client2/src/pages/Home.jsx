@@ -74,7 +74,8 @@ const Home = () => {
     fetchFriendRequest();
     fetchSuggestedFriend();
     setLoading(false);
-  }, []);
+    console.log("umar");
+  }, [user]);
   const handlePostSubmit = async (data) => {
     setPosting(true);
     try {
@@ -85,9 +86,10 @@ const Home = () => {
       // console.log("filehowm", typeof file);
       const newData = uri ? { ...data, image: uri } : data;
 
+      dispatch(setPosts([newData, ...posts]));
       const res = await axiosInstance.post("/posts/create-post", newData);
-      // console.log(res.data, "Post created");
-      dispatch(setPosts([res.data.data, ...posts]));
+      console.log(res.data.data, "Post created");
+      console.log("there are posts", [newData, ...posts]);
       setPosting(false);
 
       if (!res) {
@@ -97,7 +99,7 @@ const Home = () => {
 
       setFile(null);
       reset();
-      await fetchPost();
+      // await fetchPost();
       setPosting(false);
     } catch (error) {
       setPosting(false);
@@ -147,7 +149,7 @@ const Home = () => {
       const res = await axiosInstance.post("/users/friend-request", {
         requestTo: id,
       });
-      console.log(res.data, "sending friend request");
+      // console.log(res.data, "sending friend request");
       await fetchSuggestedFriend();
     } catch (error) {
       setErrMsg(error);
@@ -161,7 +163,7 @@ const Home = () => {
         rid: id,
         status,
       });
-      console.log(res.data, "sending friend request");
+      // console.log(res.data, "sending friend request");
       // fetchSuggestedFriend();
     } catch (error) {
       setErrMsg(error);

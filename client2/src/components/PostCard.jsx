@@ -42,9 +42,9 @@ const PostCard = ({ post, user, likePost, deletePost }) => {
     <div className="p-4 bg-primary rounded-xl my-2">
       <div className="flex items-center gap-3 mb-2">
         <Link to={"/profile/" + post?.userId?._id}>
-          {console.log("post.userId.profileUr1", post.userId.profileUrl)}
+          {/* {console.log("post.userId.profileUr1", post.userId.profileUrl)} */}
           <img
-            src={post.userId.profileUrl || NoProfile}
+            src={post?.userId?.profileUrl || NoProfile}
             alt={post?.userId?.firstName}
             className="object-cover rounded-full w-14 h-14"
           />
@@ -112,14 +112,14 @@ const PostCard = ({ post, user, likePost, deletePost }) => {
             className="flex items-center gap-2 text-base cursor-pointer"
             onClick={() => {
               setShowComments(!showComments);
-              getComments(post._id);
+              getComments(post?._id);
             }}
           >
             <BiComment size={20} />
             {post?.likes?.length} Comments
           </p>
           {/* Delete */}
-          {user._id === post.userId._id && (
+          {user._id === post?.userId?._id && (
             <div
               className="flex items-center gap-1 text-base cursor-pointer text-ascent-1"
               onClick={() => deletePost(post._id)}

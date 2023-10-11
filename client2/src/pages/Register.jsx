@@ -49,7 +49,7 @@ const Register = () => {
     try {
       // console.log(data, "data");
       const response = await axiosInstance.post("users/register", data);
-      // console.log(response.data, "registering");
+      console.log(response.data, "registering");
     } catch (error) {
       console.log(error);
     }
